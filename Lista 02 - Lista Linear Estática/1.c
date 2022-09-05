@@ -41,20 +41,20 @@ int vazia(LISTA *L)
 }
 
 
-int inserirNoFim(LISTA *L, int elem)
-{
-    if(cheia(L)) // verifica se tem espaço na lista para inserir
-    {
-        printf("\nERRO: lista cheia!");
-        return 1; // retorna 1 para tratar erros no main
-    }
-    else
-    {
-        L->valor[L->n+1] = elem; // como o indice "n" é iniciado na posição "-1" para se inserir passasse para o valor a posição n+1, que no caso vai ser a primeira posição na frente do indice;
-        L-> n = L-> n+1; // atualiza a posição do indice, pois inseriu-se um elemento na posição em que "n" estava
-        return 0; // retorna 0 para tratar erros no main
-    }
-}
+//int inserirNoFim(LISTA *L, int elem)
+//{
+//    if(cheia(L)) // verifica se tem espaço na lista para inserir
+//    {
+//        printf("\nERRO: lista cheia!");
+//        return 1; // retorna 1 para tratar erros no main
+//    }
+//    else
+//    {
+//        L->valor[L->n+1] = elem; // como o indice "n" é iniciado na posição "-1" para se inserir passasse para o valor a posição n+1, que no caso vai ser a primeira posição na frente do indice;
+//        L-> n = L-> n+1; // atualiza a posição do indice, pois inseriu-se um elemento na posição em que "n" estava
+//        return 0; // retorna 0 para tratar erros no main
+//    }
+//}
 
 int inserirPosicaoEspecifica(LISTA *L, int pos, int elem)
 {
