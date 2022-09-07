@@ -28,7 +28,7 @@ int vazia(LISTA *L)
 
 int cheia(LISTA *L)
 {
-    if(L->n + 1 == T)
+    if(L->n+1 == T)
         return 1;
     else
         return 0;
@@ -56,14 +56,32 @@ int acessar(LISTA *L, int pos)
         printf("\nERRO: lista vazia!");
         return 1; // retorna 1 para tratar erros no main
     }
-    if(pos < 0 || pos > L->n+1) // verifica se a posição escolhida para acessar existe realmente na lista
+    if((pos < 0) || (pos > L->n+1)) // verifica se a posição escolhida para acessar existe realmente na lista
     {
-        printf("\nERRO: posição escolhida fora dos limites");
+        printf("\nERRO: posicao escolhida fora dos limites");
         return 1; // retorna 1 para tratar erros no main
     }
     else
     {
         return L->valor[pos]; // retorna o valor que esta naquela posição especifica;
+    }
+}
+
+int imprimir(LISTA *L)
+{
+    int i;
+
+    if(vazia(L)) // verifica se tem alguma coisa pra imprimir
+    {
+        printf("\nERRO: lista vazia!");
+        return 1; // retorna 1 para tratar erros no main
+    }
+    else
+    {
+        for(i = 0; i<=(L->n); i++) // enquanto não chegar no final da lista vai imprimindo
+        {
+            printf("\n%d - |%d|", i, L->valor[i]);
+        }
     }
 }
 
@@ -78,36 +96,23 @@ int intercalarListas(LISTA *L1, LISTA *L2)
     }
     else
     {
-        for(int i=0;i<T;i++)
+        //        while(i < (L1->n) + (L2->n))
+//        {
+//            inserirNoFim(&L3, acessar(L1, i));
+//            inserirNoFim(&L3, acessar(L2, i));
+//            i++;
+//        }
+        int i;
+        for(i=0;i<=(L1->n) + (L2->n);i++)
         {
             inserirNoFim(&L3, acessar(L1, i));
             inserirNoFim(&L3, acessar(L2, i));
         }
-
     }
-
     imprimir(&L3);
 }
 
-int imprimir(LISTA *L)
-{
-    int i;
-
-    if(vazia(L)) // verifica se tem alguma coisa pra imprimir
-    {
-        printf("\nERRO: lista vazia!");
-        return 1; // retorna 1 para tratar erros no main
-    }
-    else
-    {
-        for(i = 0; i<(L->n+1); i++) // enquanto não chegar no final da lista vai imprimindo
-        {
-            printf("\n%d - |%d|", i, L->valor[i]);
-        }
-    }
-}
-
-void main()
+int main()
 {
     LISTA L1, L2;
     inicializar(&L1);
@@ -137,8 +142,8 @@ void main()
     imprimir(&L2);
 
     printf("\nIntercalando listas...\n");
-    intercalarListas(&L1,&L2);
-    system("pause");
-
     printf("\nListas intercaladas em L3");
+    intercalarListas(&L1,&L2);
+    printf("\n");
+    system("pause");
 }
