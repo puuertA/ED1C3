@@ -47,7 +47,7 @@ void empilhar (PILHA *p, int val)
     }
 }
 
-int desempilha (PILHA *p)
+int desempilhar (PILHA *p)
 {
     int aux;
     if(vazia(p))
@@ -125,7 +125,7 @@ int main()
 {
     PILHA p;
     inicializar(&p);
-    int valor, i;
+    int valor = 0, i;
 
     for(i=0;i<TAMMAX;i++)
     {
@@ -133,5 +133,7 @@ int main()
         scanf("%d", &valor);
         verificarPar(&p, valor);
     }
+
+    printf("\n\nPilha apos as verificacoes: \n");
     exibe(&p);
 }
