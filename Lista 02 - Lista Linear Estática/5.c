@@ -43,8 +43,15 @@ int inserirNoFim(LISTA *L, int elem)
     }
     else
     {
-        L->valor[L->n+1] = elem;
+        int i;
+
+        for(i=(L->n+1); i>L->n+1; i--)
+        {
+            L->valor[i] = L->valor[i-1];
+        }
+
         L->n = L->n+1;
+        L->valor[L->n] = elem;
         return 0;
     }
 }
@@ -85,10 +92,10 @@ int imprimir(LISTA *L)
     }
 }
 
-int intercalarListas(LISTA *L1, LISTA *L2)
+int intercalarListas(LISTA *L1, LISTA *L2, LISTA *L3)
 {
-    LISTA L3;
-    inicializar(&L3);
+    //LISTA L3;
+    //inicializar(&L3);
     if((L1->n) + (L2->n) == T)
     {
         printf("\nERRO: Impossivel intercalar, listas excedem o número máximo de elementos");
@@ -96,28 +103,38 @@ int intercalarListas(LISTA *L1, LISTA *L2)
     }
     else
     {
-        //        while(i < (L1->n) + (L2->n))
-//        {
-//            inserirNoFim(&L3, acessar(L1, i));
-//            inserirNoFim(&L3, acessar(L2, i));
-//            i++;
-//        }
-        int i;
-        for(i=0;i<=(L1->n) + (L2->n);i++)
+//        while(i < (L1->n) + (L2->n))
+////        {
+////            inserirNoFim(&L3, acessar(L1, i));
+////            inserirNoFim(&L3, acessar(L2, i));
+////            i++;
+////        }
+        int i = 0;
+        while(i <= L1->n && i <= L2->n)
         {
-            inserirNoFim(&L3, acessar(L1, i));
-            inserirNoFim(&L3, acessar(L2, i));
+            if((L1->n+1) + (L2->n+1) < T)
+            {
+            inserirNoFim(L3, acessar(L1, i));
+            inserirNoFim(L3, acessar(L2, i));
+            }
+            i++;
         }
+////        for(i=0;i<=(L1->n) + (L2->n);i++)
+////        {
+////            inserirNoFim(L3, acessar(L1, i));
+////            inserirNoFim(L3, acessar(L2, i));
+////        }
     }
-    imprimir(&L3);
+    imprimir(L3);
 }
 
 int main()
 {
-    LISTA L1, L2;
+    LISTA L1, L2, L3;
     inicializar(&L1);
     inicializar(&L2);
-    int i = 1, j = 1, valor;
+    inicializar(&L3);
+    int i = 0, j = 0, valor;
 
     do
     {
@@ -143,7 +160,7 @@ int main()
 
     printf("\nIntercalando listas...\n");
     printf("\nListas intercaladas em L3");
-    intercalarListas(&L1,&L2);
+    intercalarListas(&L1,&L2,&L3);
     printf("\n");
     system("pause");
 }
