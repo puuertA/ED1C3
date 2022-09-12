@@ -92,41 +92,74 @@ int imprimir(LISTA *L)
     }
 }
 
-int intercalarListas(LISTA *L1, LISTA *L2, LISTA *L3)
+//intercalar da natalia
+void intercalarListas(LISTA *L1, LISTA *L2, LISTA *L3)
 {
-    //LISTA L3;
-    //inicializar(&L3);
-    if((L1->n) + (L2->n) == T)
+    int i;
+    if((L1->n+1)+(L2->n+1)>T) // se as duas listas juntas excedem T
     {
         printf("\nERRO: Impossivel intercalar, listas excedem o número máximo de elementos");
-        return 1;
+        return;
     }
-    else
+    if((L1->n)==(L2->n)) // se elas tem o mesmo tamanho pode intercalar sem problemas
     {
-//        while(i < (L1->n) + (L2->n))
-////        {
-////            inserirNoFim(&L3, acessar(L1, i));
-////            inserirNoFim(&L3, acessar(L2, i));
-////            i++;
-////        }
-        int i = 0;
-        while(i <= L1->n && i <= L2->n)
+        for(i=0; i<=L1->n; i++) // for intercalando as duas
         {
-            if((L1->n+1) + (L2->n+1) < T)
-            {
-            inserirNoFim(L3, acessar(L1, i));
-            inserirNoFim(L3, acessar(L2, i));
-            }
-            i++;
+            inserirNoFim(L3, L1->valor[i]);
+            inserirNoFim(L3, L2->valor[i]);
         }
-////        for(i=0;i<=(L1->n) + (L2->n);i++)
-////        {
-////            inserirNoFim(L3, acessar(L1, i));
-////            inserirNoFim(L3, acessar(L2, i));
-////        }
     }
+    else if((L1->n)>(L2->n)) // se L1 for maior que L2
+    {
+        for(i=0; i<=L1->n; i++)
+        {
+            inserirNoFim(L3, L1->valor[i]); // insere em L3 primeiro de L1
+            if(i<=L2->n) // verifica se o indice do for é menor ou igual que o indice de L2
+            {
+                inserirNoFim(L3, L2->valor[i]); // se for insere em L3 de L2
+            }
+        }
+    }
+    else // se L2 for maior que L1, faz o processo contrario a anterior
+    {
+        for(i=0; i<=L2->n; i++)
+        {
+            if(i<=L1->n) // verifica se o indice do for é menor que o indice de L1
+            {
+                inserirNoFim(L3, L1->valor[i]); // se for insere
+            }
+            inserirNoFim(L3, L2->valor[i]); // depois insere L2 normalmente
+
+        }
+    }
+
     imprimir(L3);
 }
+
+//int intercalarListas(LISTA *L1, LISTA *L2, LISTA *L3)
+//{
+//    //LISTA L3;
+//    //inicializar(&L3);
+//    if((L1->n) + (L2->n) == T)
+//    {
+//        printf("\nERRO: Impossivel intercalar, listas excedem o número máximo de elementos");
+//        return 1;
+//    }
+//    else
+//    {
+//        int i = 0;
+//        while(i <= L1->n+1 && i <= L2->n)
+//        {
+//            //if((L1->n) + (L2->n) <= T)
+//            //{
+//            inserirNoFim(L3, acessar(L1, i));
+//            inserirNoFim(L3, acessar(L2, i));
+//            //}
+//            i++;
+//        }
+//    }
+//    imprimir(L3);
+//}
 
 int main()
 {
